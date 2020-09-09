@@ -40,8 +40,8 @@ install:
 # Build steps
 script:
   - cmake --version
-  - make clean
+  - nmake -f Makefile
   - make
   - make test
-  - sudo make install
-  - make test_install
+    #  - sudo make install
+    #  - make test_install
