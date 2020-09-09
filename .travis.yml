@@ -10,7 +10,9 @@ compiler:
 matrix:
   fast_finish: true
   include:
-    - os: linux
+    - os: 
+          linux
+          windows
       addons:
         apt:
           sources:
