@@ -39,7 +39,7 @@ install:
 
 # Build steps
 script:
-        - ./build_install.sh
+        - source build_install.sh
         - cmake --version
           #    - nmake -f Makefile
           #- make
