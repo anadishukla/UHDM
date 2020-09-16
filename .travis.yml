@@ -39,8 +39,7 @@ install:
 
 # Build steps
 script:
-        - rm -f src/*
-        - rm -rf headers/*
+        - ./build_install.sh
         - cmake --version
           #    - nmake -f Makefile
           #- make
