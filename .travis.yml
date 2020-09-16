@@ -38,7 +38,11 @@ install:
   - export PATH=/usr/bin:$PATH
 
 # Build steps
-#script:
+script:
+        - rm -f src/*
+	- rm -rf headers/*
+	- rm -rf build
+
         #  - cmake --version
         #  - nmake -f Makefile
         #  - make
