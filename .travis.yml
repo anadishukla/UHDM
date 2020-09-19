@@ -41,7 +41,6 @@ install:
 script:
         - cmake --version
         - source build_install.sh
-        - make clean
           #- make
           #- make test
     #  - sudo make install
