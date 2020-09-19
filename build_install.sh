@@ -13,4 +13,7 @@ mkdir -p $(PREFIX)
 #	$(MAKE) -C build install
 which cmake
 set MAKE=`which cmake`
+echo $MAKE
+$(MAKE) -C build install
+
 
