@@ -39,9 +39,8 @@ install:
 
 # Build steps
 script:
-        - source build_install.sh
         - cmake --version
-          #    - nmake -f Makefile
+        - source build_install.sh
           #- make
           #- make test
     #  - sudo make install
