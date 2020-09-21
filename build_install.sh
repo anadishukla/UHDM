@@ -10,6 +10,10 @@ set PREFIX="../install"
 echo $PREFIX
 #BUILD
 cmake --version
+which python
+which python3
+where python
+where python3
 mkdir -p build
 cd build
 echo "CMAKE at $PWD"
