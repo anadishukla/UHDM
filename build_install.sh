@@ -7,9 +7,10 @@ rm -rf build
 ls
 
 set PREFIX="/usr/local"
+echo $PREFIX
 mkdir -p build
-cd build; cmake ../ -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$(PREFIX)
-mkdir -p $(PREFIX)
+cd build; cmake ../ -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX
+mkdir -p $PREFIX
 #	$(MAKE) -C build install
 which cmake
 set MAKE=`which cmake`
