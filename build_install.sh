@@ -6,16 +6,16 @@ rm -rf headers/*
 rm -rf build
 ls
 
-set PREFIX="/usr/local"
+set PREFIX="../install"
 echo $PREFIX
 #BUILD
 mkdir -p build
 cd build
+echo "CMAKE 1"
 cmake ../ -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX
-cmake -C build UnitTests
-cd build && ctest --output-on-failure
-mkdir -p $PREFIX
-ls
+echo "cmake build UnitTests"
+cmake build UnitTests
+ctest --output-on-failure
 #	$(MAKE) -C build install
 echo CMAKE VERSION
 which cmake
