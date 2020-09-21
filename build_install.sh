@@ -12,6 +12,8 @@ echo $PREFIX
 mkdir -p build
 cd build
 cmake ../ -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX
+cmake -C build UnitTests
+cd build && ctest --output-on-failure
 mkdir -p $PREFIX
 ls
 #	$(MAKE) -C build install
