@@ -9,14 +9,15 @@ ls
 set PREFIX="../install"
 echo $PREFIX
 #BUILD
+cmake --version
 mkdir -p build
 cd build
-echo "CMAKE 1"
+echo "CMAKE at $PWD"
 cmake ../ -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX
-cmake build
+cmake --build .
 echo "cmake build UnitTests"
-cmake build UnitTests
-ctest --output-on-failure
+#cmake build UnitTests
+#ctest --output-on-failure
 #	$(MAKE) -C build install
 echo CMAKE VERSION
 which cmake
