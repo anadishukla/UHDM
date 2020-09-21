@@ -13,6 +13,7 @@ mkdir -p build
 cd build
 echo "CMAKE 1"
 cmake ../ -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX
+cmake build
 echo "cmake build UnitTests"
 cmake build UnitTests
 ctest --output-on-failure
