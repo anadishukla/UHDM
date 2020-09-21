@@ -10,8 +10,10 @@ set PREFIX="/usr/local"
 echo $PREFIX
 #BUILD
 mkdir -p build
-cd build; cmake ../ -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX
+cd build
+cmake ../ -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX
 mkdir -p $PREFIX
+ls
 #	$(MAKE) -C build install
 echo CMAKE VERSION
 which cmake
@@ -19,8 +21,9 @@ set MAKE=`which cmake`
 echo "MAKE=$MAKE"
 #cd build && ctest --output-on-failure
 #$(MAKE) -C build install
-echo "G++ BUILD"
-#TEST_INSTALL
+cmake
+#echo "G++ BUILD"
+##TEST_INSTALL
 #g++ -std=c++14 -g tests/test1.cpp -I$PREFIX/include/uhdm -I$PREFIX/include/uhdm/include $PREFIX/lib/uhdm/libuhdm.a $PREFIX/lib/uhdm/libcapnp.a $PREFIX/lib/uhdm/libkj.a -ldl -lutil -lm -lrt -lpthread -o test_inst
 #./test_inst
 
