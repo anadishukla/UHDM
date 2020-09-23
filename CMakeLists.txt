@@ -38,7 +38,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bin)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bin)
 if(UNIX)
 	set(PYTHON_EXE python3)
-else 
+else()
 	set(PYTHON_EXE python)
 endif()
 include_directories("${PROJECT_SOURCE_DIR}/include/")
