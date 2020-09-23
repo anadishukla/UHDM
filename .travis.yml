@@ -14,7 +14,10 @@ matrix:
 
 # Build steps
 script:
-        - source build_install.sh
+        - source build_install.sh clean
+        - source build_install.sh build
+        - source build_install.sh release
+        - source build_install.sh test_windows
           #- make
           #- make test
     #  - sudo make install
