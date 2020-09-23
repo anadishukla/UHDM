@@ -1,65 +1,86 @@
 # /bin/sh
 
 release(){
+  set CWD="$PWD" 
+  cd build
   cmake --build .
+  cd $CWD
 }
 
 debug(){
+  set CWD="$PWD" 
   set PREFIX="../install"
   mkdir -p build
   cd build
   cmake ../ -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=$PREFIX
   cmake --build .
+  cd $CWD
 }
 
 test_windows(){
+  set CWD="$PWD" 
   build
   cmake --build . --target UnitTests
+  cd $CWD
 }
 
 test_unix(){
+  set CWD="$PWD" 
   build
   cmake --build . --target UnitTests
   cd build && ctest --output-on-failure
+  cd $CWD
 }
 
 test_junit(){
+  set CWD="$PWD" 
   release
   cd build && ctest --no-compress-output -T Test -C RelWithDebInfo --output-on-failure
   xsltproc .github/kokoro/ctest2junit.xsl build/Testing/*/Test.xml > build/test_results.xml
+  cd $CWD
 }
 
 
 clean(){
+  set CWD="$PWD" 
   rm -f src/*
   rm -rf headers/*
   rm -rf build
+  cd $CWD
 }
 
 install(){ 
+  set CWD="$PWD" 
   set PREFIX="../install"
   build
   mkdir -p $PREFIX
   cmake --build . --target install
+  cd $CWD
 }
 
 uninstall(){
+  set CWD="$PWD" 
   set PREFIX="../install"
   rm -rf ${PREFIX}/lib/uhdm
   rm -rf ${PREFIX}/include/uhdm
+  cd $CWD
 }
 
 build(){
+  set CWD="$PWD" 
   set PREFIX="../install"
   mkdir -p build
   cd build
   cmake ../ -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX
+  cd $CWD
 }
 
 test_install(){
+  set CWD="$PWD" 
   set CXX="g++"
   $(CXX) -std=c++14 -g tests/test1.cpp -I$(PREFIX)/include/uhdm -I$(PREFIX)/include/uhdm/include $(PREFIX)/lib/uhdm/libuhdm.a $(PREFIX)/lib/uhdm/libcapnp.a $(PREFIX)/lib/uhdm/libkj.a -ldl -lutil -lm -lrt -lpthread -o test_inst
   ./test_inst
+  cd $CWD
 }
 
 for arg in $@
