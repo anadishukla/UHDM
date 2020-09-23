@@ -1,13 +1,13 @@
 # /bin/sh
 
-release(){
+uhdm_release(){
   export CWD="$PWD" 
-  cd build
+  build
   cmake --build .
   cd $CWD
 }
 
-debug(){
+uhdm_debug(){
   export CWD="$PWD" 
   set PREFIX="../install"
   mkdir -p build
@@ -17,14 +17,14 @@ debug(){
   cd $CWD
 }
 
-test_windows(){
+uhdm_test_windows(){
   export CWD="$PWD" 
   build
   cmake --build . --target UnitTests
   cd $CWD
 }
 
-test_unix(){
+uhdm_test_unix(){
   export CWD="$PWD" 
   build
   cmake --build . --target UnitTests
@@ -32,7 +32,7 @@ test_unix(){
   cd $CWD
 }
 
-test_junit(){
+uhdm_test_junit(){
   export CWD="$PWD" 
   release
   cd build && ctest --no-compress-output -T Test -C RelWithDebInfo --output-on-failure
@@ -41,7 +41,7 @@ test_junit(){
 }
 
 
-clean(){
+uhdm_clean(){
   echo $PWD
   export CWD=$PWD
   echo $CWD
@@ -51,7 +51,7 @@ clean(){
   cd $CWD
 }
 
-install(){ 
+uhdm_install(){ 
   export CWD="$PWD" 
   set PREFIX="../install"
   build
@@ -60,7 +60,7 @@ install(){
   cd $CWD
 }
 
-uninstall(){
+uhdm_uninstall(){
   export CWD="$PWD" 
   set PREFIX="../install"
   rm -rf ${PREFIX}/lib/uhdm
@@ -68,7 +68,7 @@ uninstall(){
   cd $CWD
 }
 
-build(){
+uhdm_build(){
   export CWD="$PWD" 
   set PREFIX="../install"
   mkdir -p build
@@ -77,7 +77,7 @@ build(){
   cd $CWD
 }
 
-test_install(){
+uhdm_test_install(){
   export CWD="$PWD" 
   set CXX="g++"
   $(CXX) -std=c++14 -g tests/test1.cpp -I$(PREFIX)/include/uhdm -I$(PREFIX)/include/uhdm/include $(PREFIX)/lib/uhdm/libuhdm.a $(PREFIX)/lib/uhdm/libcapnp.a $(PREFIX)/lib/uhdm/libkj.a -ldl -lutil -lm -lrt -lpthread -o test_inst
