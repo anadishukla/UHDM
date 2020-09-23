@@ -1,14 +1,14 @@
 # /bin/sh
 
 release(){
-  set CWD="$PWD" 
+  export CWD="$PWD" 
   cd build
   cmake --build .
   cd $CWD
 }
 
 debug(){
-  set CWD="$PWD" 
+  export CWD="$PWD" 
   set PREFIX="../install"
   mkdir -p build
   cd build
@@ -18,14 +18,14 @@ debug(){
 }
 
 test_windows(){
-  set CWD="$PWD" 
+  export CWD="$PWD" 
   build
   cmake --build . --target UnitTests
   cd $CWD
 }
 
 test_unix(){
-  set CWD="$PWD" 
+  export CWD="$PWD" 
   build
   cmake --build . --target UnitTests
   cd build && ctest --output-on-failure
@@ -33,7 +33,7 @@ test_unix(){
 }
 
 test_junit(){
-  set CWD="$PWD" 
+  export CWD="$PWD" 
   release
   cd build && ctest --no-compress-output -T Test -C RelWithDebInfo --output-on-failure
   xsltproc .github/kokoro/ctest2junit.xsl build/Testing/*/Test.xml > build/test_results.xml
@@ -42,7 +42,9 @@ test_junit(){
 
 
 clean(){
-  set CWD="$PWD" 
+  echo $PWD
+  export CWD=$PWD
+  echo $CWD
   rm -f src/*
   rm -rf headers/*
   rm -rf build
@@ -50,7 +52,7 @@ clean(){
 }
 
 install(){ 
-  set CWD="$PWD" 
+  export CWD="$PWD" 
   set PREFIX="../install"
   build
   mkdir -p $PREFIX
@@ -59,7 +61,7 @@ install(){
 }
 
 uninstall(){
-  set CWD="$PWD" 
+  export CWD="$PWD" 
   set PREFIX="../install"
   rm -rf ${PREFIX}/lib/uhdm
   rm -rf ${PREFIX}/include/uhdm
@@ -67,7 +69,7 @@ uninstall(){
 }
 
 build(){
-  set CWD="$PWD" 
+  export CWD="$PWD" 
   set PREFIX="../install"
   mkdir -p build
   cd build
@@ -76,13 +78,12 @@ build(){
 }
 
 test_install(){
-  set CWD="$PWD" 
+  export CWD="$PWD" 
   set CXX="g++"
   $(CXX) -std=c++14 -g tests/test1.cpp -I$(PREFIX)/include/uhdm -I$(PREFIX)/include/uhdm/include $(PREFIX)/lib/uhdm/libuhdm.a $(PREFIX)/lib/uhdm/libcapnp.a $(PREFIX)/lib/uhdm/libkj.a -ldl -lutil -lm -lrt -lpthread -o test_inst
   ./test_inst
   cd $CWD
 }
-
 for arg in $@
 do
    if [ "$arg" = "release" ]; then 
