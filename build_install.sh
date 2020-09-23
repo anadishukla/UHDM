@@ -2,7 +2,10 @@
 
 uhdm_release(){
   export CWD="$PWD" 
-  build
+  set PREFIX="../install"
+  mkdir -p build
+  cd build
+  cmake ../ -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX
   cmake --build .
   cd $CWD
 }
@@ -19,14 +22,20 @@ uhdm_debug(){
 
 uhdm_test_windows(){
   export CWD="$PWD" 
-  build
+  set PREFIX="../install"
+  mkdir -p build
+  cd build
+  cmake ../ -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX
   cmake --build . --target UnitTests
   cd $CWD
 }
 
 uhdm_test_unix(){
   export CWD="$PWD" 
-  build
+  set PREFIX="../install"
+  mkdir -p build
+  cd build
+  cmake ../ -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX
   cmake --build . --target UnitTests
   cd build && ctest --output-on-failure
   cd $CWD
@@ -54,7 +63,10 @@ uhdm_clean(){
 uhdm_install(){ 
   export CWD="$PWD" 
   set PREFIX="../install"
-  build
+  set PREFIX="../install"
+  mkdir -p build
+  cd build
+  cmake ../ -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX
   mkdir -p $PREFIX
   cmake --build . --target install
   cd $CWD
