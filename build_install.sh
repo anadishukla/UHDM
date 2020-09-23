@@ -84,36 +84,36 @@ test_install(){
   ./test_inst
   cd $CWD
 }
-for arg in $@
-do
-   if [ "$arg" = "release" ]; then 
-	   release
-   fi
-   if [ "$arg" = "debug" ]; then 
-	   debug
-   fi
-   if [ "$arg" = "test_windows" ]; then 
-	   test_windows
-   fi
-   if [ "$arg" = "test_unix" ]; then 
-	   test_unix
-   fi
-   if [ "$arg" = "test_junit" ]; then 
-	   test_junit
-   fi
-   if [ "$arg" = "clean" ]; then 
-	   clean
-   fi
-   if [ "$arg" = "install" ]; then 
-	   install
-   fi
-   if [ "$arg" = "uninstall" ]; then 
-	   uninstall
-   fi
-   if [ "$arg" = "build" ]; then 
-	   build
-   fi
-   if [ "$arg" = "test_install" ]; then 
-	   test_install
-   fi
-done
+#for arg in $@
+#do
+#   if [ "$arg" = "release" ]; then 
+#	   release
+#   fi
+#   if [ "$arg" = "debug" ]; then 
+#	   debug
+#   fi
+#   if [ "$arg" = "test_windows" ]; then 
+#	   test_windows
+#   fi
+#   if [ "$arg" = "test_unix" ]; then 
+#	   test_unix
+#   fi
+#   if [ "$arg" = "test_junit" ]; then 
+#	   test_junit
+#   fi
+#   if [ "$arg" = "clean" ]; then 
+#	   clean
+#   fi
+#   if [ "$arg" = "install" ]; then 
+#	   install
+#   fi
+#   if [ "$arg" = "uninstall" ]; then 
+#	   uninstall
+#   fi
+#   if [ "$arg" = "build" ]; then 
+#	   build
+#   fi
+#   if [ "$arg" = "test_install" ]; then 
+#	   test_install
+#   fi
+#done

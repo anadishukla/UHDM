@@ -36,7 +36,11 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bin)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bin)
-
+if(UNIX)
+	set(PYTHON_EXE python3)
+else 
+	set(PYTHON_EXE python)
+endif()
 include_directories("${PROJECT_SOURCE_DIR}/include/")
 include_directories("${PROJECT_SOURCE_DIR}/")
 include_directories("${PROJECT_SOURCE_DIR}/headers/")
@@ -96,7 +100,7 @@ endforeach(header_file ${model-GENERATED_SRC})
 add_custom_target(GenerateCode DEPENDS ${model-GENERATED_SRC})
 add_custom_command(
   OUTPUT ${model-GENERATED_SRC}
-  COMMAND python ${PROJECT_SOURCE_DIR}/model_gen/tcl_wrapper.py
+  COMMAND $PYTHON_EXE ${PROJECT_SOURCE_DIR}/model_gen/tcl_wrapper.py
           ${PROJECT_SOURCE_DIR}/model_gen/model_gen.tcl ${PROJECT_SOURCE_DIR}/model/models.lst
           ${CMAKE_CURRENT_BINARY_DIR}
   WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}"

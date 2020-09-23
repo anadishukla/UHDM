@@ -13,13 +13,6 @@ matrix:
         - python --version
         - python -m pip install --upgrade pip
       env: PATH=/c/Python38:/c/Python38/Scripts:$PATH
-      #      script:
-      #        - source build_install.sh clean
-      #        - source build_install.sh build
-      #        - source build_install.sh release
-      #        - if [[ $TRAVIS_OS_NAME == windows ]]; then source build_install.sh test_windows; fi;
-      #        - if [[ $TRAVIS_OS_NAME == linux ]]; then source build_install.sh test_unix; fi;
-      #
     - os: linux
       compiler: gcc
       addons:
@@ -37,23 +30,19 @@ matrix:
             - tclsh
 
       env:
-        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
-          #      script:
-          #        - cmake --version
-          #        - make clean
-          #        - make
-          #        - make test
-          #        - sudo make install
-          #        - make test_install
-
-
+        - CC=gcc-7
+        - CXX=g++-7
+        - PATH=/usr/bin:$PATH
+ 
 # Build steps
 script:
-  - source build_install.sh clean
-  - source build_install.sh build
-  - source build_install.sh release
-  - if [[ $TRAVIS_OS_NAME == windows ]]; then source build_install.sh test_windows; fi;
-  - if [[ $TRAVIS_OS_NAME == linux ]]; then source build_install.sh test_unix; fi;
+  - cmake --version
+  - source build_install.sh 
+  - clean
+  - build
+  - release
+  - if [[ $TRAVIS_OS_NAME == windows ]]; then test_windows; fi;
+  - if [[ $TRAVIS_OS_NAME == linux ]]; then test_unix; fi;
           #- make
           #- make test
     #  - sudo make install
