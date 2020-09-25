@@ -44,7 +44,7 @@ script:
   - source build_install.sh 
   - uhdm_clean
   - uhdm_release
-  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then uhdm_test_windows; fi;
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then uhdm_test_unix; fi;
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then uhdm_test_unix; fi;
   - uhdm_install
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then uhdm_test_install; fi;
