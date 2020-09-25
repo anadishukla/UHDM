@@ -89,7 +89,7 @@ uhdm_build(){
 uhdm_test_install(){
   export CWD="$PWD" 
   set CXX="g++"
-  $(CXX) -std=c++14 -g tests/test1.cpp -I${UHDM_PREFIX}/include/uhdm -I$(PREFIX)/include/uhdm/include ${UHDM_PREFIX}/lib/uhdm/libuhdm.a ${UHDM_PREFIX}/lib/uhdm/libcapnp.a ${UHDM_PREFIX}/lib/uhdm/libkj.a -ldl -lutil -lm -lrt -lpthread -o test_inst
+  ${CXX} -std=c++14 -g tests/test1.cpp -I${UHDM_PREFIX}/include/uhdm -I${UHDM_PREFIX}/include/uhdm/include ${UHDM_PREFIX}/lib/uhdm/libuhdm.a ${UHDM_PREFIX}/lib/uhdm/libcapnp.a ${UHDM_PREFIX}/lib/uhdm/libkj.a -ldl -lutil -lm -lrt -lpthread -o test_inst
   ./test_inst
   cd $CWD
 }
