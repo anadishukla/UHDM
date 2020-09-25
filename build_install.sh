@@ -11,7 +11,7 @@ echo "UHDM_INSTALL_PREFIX=$UHDM_INSTALL_PREFIX"
 uhdm_release(){
   mkdir -p build
   cd build
-  cmake ../ -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$UHDM_PREFIX
+  cmake ../ -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$UHDM_INSTALL_PREFIX
   cmake --build .
   cd $CWD
 }
@@ -19,7 +19,7 @@ uhdm_release(){
 uhdm_debug(){
   mkdir -p build
   cd build
-  cmake ../ -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=$UHDM_PREFIX
+  cmake ../ -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=$UHDM_INSTALL_PREFIX
   cmake --build .
   cd $CWD
 }
@@ -27,7 +27,7 @@ uhdm_debug(){
 uhdm_test_windows(){
   mkdir -p build
   cd build
-  cmake ../ -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$UHDM_PREFIX
+  cmake ../ -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$UHDM_INSTALL_PREFIX
   cmake --build . --target UnitTests
   cd $CWD
 }
@@ -35,7 +35,7 @@ uhdm_test_windows(){
 uhdm_test_unix(){
   mkdir -p build
   cd build
-  cmake ../ -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$UHDM_PREFIX
+  cmake ../ -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$UHDM_INSTALL_PREFIX
   cmake --build . --target UnitTests
   ctest --output-on-failure
   cd $CWD
@@ -59,8 +59,8 @@ uhdm_clean(){
 uhdm_install(){ 
   mkdir -p build
   cd build
-  cmake ../ -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$UHDM_PREFIX
-  mkdir -p $UHDM_PREFIX
+  cmake ../ -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$UHDM_INSTALL_PREFIX
+  mkdir -p $UHDM_INSTALL_PREFIX
   cmake --build . --target install
   cd $CWD
 }
@@ -74,7 +74,7 @@ uhdm_uninstall(){
 uhdm_build(){
   mkdir -p build
   cd build
-  cmake ../ -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$UHDM_PREFIX
+  cmake ../ -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$UHDM_INSTALL_PREFIX
   cd $CWD
 }
 
