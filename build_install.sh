@@ -3,10 +3,11 @@ if [ -z "$UHDM_PREFIX" ] ; then
    echo "UHDM_PREFIX is unset" 
    export UHDM_PREFIX="../install"
 fi
+export UHDM_INSTALL_PREFIX=`realpath UHDM_PREFIX`
+echo "UHDM_INSTALL_PREFIX=$UHDM_INSTALL_PREFIX"
 export CWD="$PWD" 
 
 uhdm_release(){
-  export CWD="$PWD" 
   mkdir -p build
   cd build
   cmake ../ -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$UHDM_PREFIX
@@ -15,7 +16,6 @@ uhdm_release(){
 }
 
 uhdm_debug(){
-  export CWD="$PWD" 
   mkdir -p build
   cd build
   cmake ../ -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=$UHDM_PREFIX
@@ -24,7 +24,6 @@ uhdm_debug(){
 }
 
 uhdm_test_windows(){
-  export CWD="$PWD" 
   mkdir -p build
   cd build
   cmake ../ -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$UHDM_PREFIX
@@ -33,7 +32,6 @@ uhdm_test_windows(){
 }
 
 uhdm_test_unix(){
-  export CWD="$PWD" 
   mkdir -p build
   cd build
   cmake ../ -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$UHDM_PREFIX
@@ -43,7 +41,6 @@ uhdm_test_unix(){
 }
 
 uhdm_test_junit(){
-  export CWD="$PWD" 
   release
   cd build && ctest --no-compress-output -T Test -C RelWithDebInfo --output-on-failure
   xsltproc .github/kokoro/ctest2junit.xsl build/Testing/*/Test.xml > build/test_results.xml
@@ -52,9 +49,6 @@ uhdm_test_junit(){
 
 
 uhdm_clean(){
-  echo $PWD
-  export CWD=$PWD
-  echo $CWD
   rm -f src/*
   rm -rf headers/*
   rm -rf build
@@ -62,7 +56,6 @@ uhdm_clean(){
 }
 
 uhdm_install(){ 
-  export CWD="$PWD" 
   mkdir -p build
   cd build
   cmake ../ -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$UHDM_PREFIX
@@ -72,14 +65,12 @@ uhdm_install(){
 }
 
 uhdm_uninstall(){
-  export CWD="$PWD" 
-  rm -rf ${PREFIX}/lib/uhdm
-  rm -rf ${PREFIX}/include/uhdm
+  rm -rf ${UHDM_INSTALL_PREFIX}/lib/uhdm
+  rm -rf ${UHDM_INSTALL_PREFIX}/include/uhdm
   cd $CWD
 }
 
 uhdm_build(){
-  export CWD="$PWD" 
   mkdir -p build
   cd build
   cmake ../ -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$UHDM_PREFIX
@@ -87,9 +78,9 @@ uhdm_build(){
 }
 
 uhdm_test_install(){
-  export CWD="$PWD" 
   set CXX="g++"
-  ${CXX} -std=c++14 -g tests/test1.cpp -I${UHDM_PREFIX}/include/uhdm -I${UHDM_PREFIX}/include/uhdm/include ${UHDM_PREFIX}/lib/uhdm/libuhdm.a ${UHDM_PREFIX}/lib/uhdm/libcapnp.a ${UHDM_PREFIX}/lib/uhdm/libkj.a -ldl -lutil -lm -lrt -lpthread -o test_inst
+
+  ${CXX} -std=c++14 -g tests/test1.cpp -I${UHDM_INSTALL_PREFIX}/include/uhdm -I${UHDM_INSTALL_PREFIX}/include/uhdm/include ${UHDM_INSTALL_PREFIX}/lib/uhdm/libuhdm.a ${UHDM_INSTALL_PREFIX}/lib/uhdm/libcapnp.a ${UHDM_INSTALL_PREFIX}/lib/uhdm/libkj.a -ldl -lutil -lm -lrt -lpthread -o test_inst
   ./test_inst
   cd $CWD
 }
