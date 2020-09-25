@@ -37,7 +37,7 @@ uhdm_test_unix(){
   cd build
   cmake ../ -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX
   cmake --build . --target UnitTests
-  cd build && ctest --output-on-failure
+  ctest --output-on-failure
   cd $CWD
 }
 
