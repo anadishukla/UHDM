@@ -1,8 +1,12 @@
 # /bin/sh
+if [ -z "$UHDM_PREFIX" ] ; then
+   echo "UHDM_PREFIX is unset" 
+   export UHDM_PREFIX="../install"
+fi
+export CWD="$PWD" 
 
 uhdm_release(){
   export CWD="$PWD" 
-  set PREFIX="../install"
   mkdir -p build
   cd build
   cmake ../ -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX
@@ -12,7 +16,6 @@ uhdm_release(){
 
 uhdm_debug(){
   export CWD="$PWD" 
-  set PREFIX="../install"
   mkdir -p build
   cd build
   cmake ../ -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=$PREFIX
@@ -22,7 +25,6 @@ uhdm_debug(){
 
 uhdm_test_windows(){
   export CWD="$PWD" 
-  set PREFIX="../install"
   mkdir -p build
   cd build
   cmake ../ -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX
@@ -32,7 +34,6 @@ uhdm_test_windows(){
 
 uhdm_test_unix(){
   export CWD="$PWD" 
-  set PREFIX="../install"
   mkdir -p build
   cd build
   cmake ../ -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX
@@ -62,8 +63,6 @@ uhdm_clean(){
 
 uhdm_install(){ 
   export CWD="$PWD" 
-  set PREFIX="../install"
-  set PREFIX="../install"
   mkdir -p build
   cd build
   cmake ../ -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX
@@ -74,7 +73,6 @@ uhdm_install(){
 
 uhdm_uninstall(){
   export CWD="$PWD" 
-  set PREFIX="../install"
   rm -rf ${PREFIX}/lib/uhdm
   rm -rf ${PREFIX}/include/uhdm
   cd $CWD
@@ -82,7 +80,6 @@ uhdm_uninstall(){
 
 uhdm_build(){
   export CWD="$PWD" 
-  set PREFIX="../install"
   mkdir -p build
   cd build
   cmake ../ -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX
