@@ -42,6 +42,7 @@ script:
   - uhdm_clean
   - uhdm_build
   - uhdm_release
+  - echo "$TRAVIS_OS_NAME"
   - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then uhdm_test_windows; fi;
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then uhdm_test_unix; fi;
           #- make
