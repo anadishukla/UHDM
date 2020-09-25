@@ -3,10 +3,10 @@ if [ -z "$UHDM_PREFIX" ] ; then
    echo "UHDM_PREFIX is unset" 
    export UHDM_PREFIX="install"
 fi
+export CWD="$PWD" 
+cd $CWD
 export UHDM_INSTALL_PREFIX=`realpath $UHDM_PREFIX`
 echo "UHDM_INSTALL_PREFIX=$UHDM_INSTALL_PREFIX"
-export CWD="$PWD" 
-echo $PWD
 
 uhdm_release(){
   mkdir -p build
